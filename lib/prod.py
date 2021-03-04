@@ -15,20 +15,26 @@ class SocketWrapper:
             self.chunk_size = chunk_size
 
         def readline(self):
-            parts = list(self.buffer)
+            if len(self.buffer) > 0:
+                return self.buffer.popleft()
+
+            parts = []
             while True:
                 part = self.socket.recv(self.chunk_size).decode('utf8')
                 if len(part) == 0:
                     # EOF
-                    if len(parts) > 0:
-                        return ''.join(parts)
                     return ''
 
                 split_part = part.split('\n')
+
                 if len(split_part) == 1:
                     # no newlines yet
                     parts.append(part)
                     continue
+
+                # foobar\n gets split to ['foobar', '']
+                if split_part[-1] == '':
+                    split_part.pop()
 
                 if len(parts) > 0:
                     parts.append(split_part[0])
