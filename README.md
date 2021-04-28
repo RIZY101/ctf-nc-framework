@@ -1,4 +1,7 @@
-# ctf-nc-framework #
+# ***Please Note***
+I forked this framework from pedro823 on Github. Credit to the source code of the framework itself should go to him. I however wrote the Main.py file in the src directory which was used for a challenge for my Cybersecuirty club. I also reported a bug in the framework that pedro823 was then able to fix.
+
+## ctf-nc-framework #
 A tiny framework to run python challenges in raw TCP.
 
 ### Installing ###
